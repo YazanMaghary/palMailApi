@@ -1,0 +1,1475 @@
+{
+	"info": {
+		"_postman_id": "61f0c7aa-dde3-4cac-845c-b9f9a9859637",
+		"name": "consultant-app(palmail)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14572624"
+	},
+	"item": [
+		{
+			"name": "public",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "a@a.com",
+									"description": "admin account",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{palmail_url}}/login",
+							"host": [
+								"{{palmail_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "o@o.com",
+									"description": "valid email",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"description": "min 6 ch",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "ahmed",
+									"description": "required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "private (need token)",
+			"item": [
+				{
+					"name": "current user auth",
+					"item": [
+						{
+							"name": "user info",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "osama ahmed",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"description": "nullable",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/update",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/logout",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "general users",
+					"item": [
+						{
+							"name": "all users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{palmail_url}}/users",
+									"host": [
+										"{{palmail_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "os",
+											"description": "required|string",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "os@gmail.com",
+											"description": "required|email|unique",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"description": "required|min:6|confirmed",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "role_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get single user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{id}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{id}"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/1?name=ahmed ali",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"1"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "ahmed ali"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"description": "required|string",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/{id}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{id}"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "change password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "password",
+											"value": "1234567",
+											"description": "required|min:6|confirmed",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "1234567",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/229/password",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"229",
+										"password"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "change role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "role_id",
+											"value": "",
+											"description": "int",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/{id}/role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{id}",
+										"role"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "mails",
+					"item": [
+						{
+							"name": "all mails",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{palmail_url}}/mails",
+									"host": [
+										"{{palmail_url}}"
+									],
+									"path": [
+										"mails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get single mail",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/mails/{id}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mails",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create mail",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "subject",
+											"value": "ffff",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"description": "nullable",
+											"type": "text"
+										},
+										{
+											"key": "sender_id",
+											"value": "1",
+											"description": "integer",
+											"type": "text"
+										},
+										{
+											"key": "archive_number",
+											"value": "2000",
+											"description": "required|string",
+											"type": "text"
+										},
+										{
+											"key": "archive_date",
+											"value": "2023-10-20",
+											"description": "required|date",
+											"type": "text"
+										},
+										{
+											"key": "decision",
+											"value": "",
+											"description": "nullable",
+											"type": "text"
+										},
+										{
+											"key": "status_id",
+											"value": "1",
+											"description": "integer",
+											"type": "text"
+										},
+										{
+											"key": "final_decision",
+											"value": "",
+											"description": "nullable",
+											"type": "text"
+										},
+										{
+											"key": "tags",
+											"value": "[2,3]",
+											"description": "nullable|list of tags id's",
+											"type": "text"
+										},
+										{
+											"key": "activities",
+											"value": "[{\"body\":\"any text\",\"user_id\" : 6},{\"body\":\"any text2\",\"user_id\" : 5}]",
+											"description": "nullable|list of map<String,dynamic>",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/mails",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update email",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "decision",
+											"value": "new decision",
+											"description": "nullable",
+											"type": "text"
+										},
+										{
+											"key": "final_decision",
+											"value": "",
+											"description": "nullable",
+											"type": "text"
+										},
+										{
+											"key": "tags",
+											"value": "[2,3]",
+											"description": "nullable|list of tags id's",
+											"type": "text"
+										},
+										{
+											"key": "activities",
+											"value": "[{\"body\":\"any text\",\"user_id\" : 1}]",
+											"description": "nullable|list of map<String,dynamic>",
+											"type": "text"
+										},
+										{
+											"key": "status_id",
+											"value": "2",
+											"description": "integer",
+											"type": "text"
+										},
+										{
+											"key": "idAttachmentsForDelete",
+											"value": "[]",
+											"description": "nullable| uing jsonEncode() and pass list of int of attachments id's",
+											"type": "text"
+										},
+										{
+											"key": "pathAttachmentsForDelete",
+											"value": "[]",
+											"description": "nullable| uing jsonEncode() and pass list of String of attachments paths",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/mails/104",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mails",
+										"104"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "single mail",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/mails/{id}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mails",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "category",
+					"item": [
+						{
+							"name": "all categories",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{palmail_url}}/categories",
+									"host": [
+										"{{palmail_url}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "single category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/categories/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "category 13",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/categories",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "mails of category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/categories/{id}/mails",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categories",
+										"{id}",
+										"mails"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "mails of category",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/categories/2/mails",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"categories",
+												"2",
+												"mails"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "which determined user category"
+				},
+				{
+					"name": "tag",
+					"item": [
+						{
+							"name": "all tags",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/tags",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tags"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "all tags with mails",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/tags?tags=[2,3]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tags"
+									],
+									"query": [
+										{
+											"key": "tags",
+											"value": "[2,3]",
+											"description": "tags = all, or tags = [2,3,...]"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "all tags of mail",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/mails/{id}/tags",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mails",
+										"{id}",
+										"tags"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create tag",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"description": "required|string",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tags",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tags"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "which determined user category"
+				},
+				{
+					"name": "status",
+					"item": [
+						{
+							"name": "all statuses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/statuses?mail=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"statuses"
+									],
+									"query": [
+										{
+											"key": "mail",
+											"value": "false",
+											"description": "true or false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "single status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/statuses/1?mail=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"statuses",
+										"1"
+									],
+									"query": [
+										{
+											"key": "mail",
+											"value": "true",
+											"description": "ture or false"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "role",
+					"item": [
+						{
+							"name": "all roles",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/roles",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"roles"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "search",
+					"item": [
+						{
+							"name": "search",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search?text=test&start&end&status_id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "test",
+											"description": "required"
+										},
+										{
+											"key": "start",
+											"value": null,
+											"description": "nullable|date"
+										},
+										{
+											"key": "end",
+											"value": null,
+											"description": "nullable|date"
+										},
+										{
+											"key": "status_id",
+											"value": null,
+											"description": "nullable|integer"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "senders",
+					"item": [
+						{
+							"name": "all senders",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{palmail_url}}/senders?mail=true",
+									"host": [
+										"{{palmail_url}}"
+									],
+									"path": [
+										"senders"
+									],
+									"query": [
+										{
+											"key": "mail",
+											"value": "true",
+											"description": "true or false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get single sender",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/senders/6?mail=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"senders",
+										"6"
+									],
+									"query": [
+										{
+											"key": "mail",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create sender",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "mobile",
+											"value": "",
+											"description": "required|unique",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "category_id",
+											"value": "",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/senders",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"senders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update sender",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "mobile",
+											"value": "",
+											"description": "required|unique",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "category_id",
+											"value": "",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/senders/{id}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"senders",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete sender",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/senders/{id}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"senders",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "the users which can use the app, and the senders can be a lot op people not use the but they compose message."
+				},
+				{
+					"name": "attachments",
+					"item": [
+						{
+							"name": "upload attachment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "mail_id",
+											"value": "",
+											"description": "string",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "",
+											"description": "'image_${DateTime.now()}'",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"description": "http.MultipartFile.fromPath('image', file.path)",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/attachments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"attachments"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
